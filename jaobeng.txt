@@ -1,0 +1,32 @@
+sud su
+sed -e "s/127.0.0.1/master/g" /usr/hadoop/hadoop-1.1.1/conf/core-site.xml
+sed -e "s/127.0.0.1/master/g" /usr/hadoop/hadoop-1.1.1/conf/mapred-site.xml 
+echo "master" > /usr/hadoop/hadoop-1.1.1/conf/masters
+echo "slave1" > /usr/hadoop/hadoop-1.1.1/conf/slaves
+echo -e "10.42.1.245 master\n10.42.1.249 slave" >> /etc/hosts
+sed -e "s/hadoop/master/g" /etc/sysconfig/network 
+
+tenant： 5acc3bc6c2934503849f507dcb0b23d2
+user：rj_region 166d2bbfcde3461fa27743f9910ec67f
+密码： 7544674
+role: rj_admin
+http://stacklab.org:5004/v2.0
+http://stacklab.org:35361/v2.0
+
+ip address 122.226.206.149 255.255.255.192                                     
+ gateway address : 122.226.206.129  
+
+【Control节点】
+IP： 120.35.11.138 端口8085 支持 SSHv2 连接
+服务器内网IP： 192.168.21.102
+ 【账户信息】：
+ 服务器 root 密码 Ruijie172
+ OPenstack 服务密码 Ruijie172
+
+
+EHGOMDOO
+
+
+452739725
+15353703538
+
