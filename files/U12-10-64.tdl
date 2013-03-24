@@ -1,0 +1,31 @@
+<template>
+  <name>U12-10-x86_64-Gold</name>
+  <os>
+    <name>Ubuntu</name>
+    <version>12.10</version>
+    <arch>x86_64</arch>
+    <install type='iso'>
+      <iso>file:/home/media/iso/ubuntu-12.10-server-amd64.iso</iso>
+    </install>
+  </os>
+  <description>Ubuntu 12.10</description>
+  <commands>
+    <command name='commands'>
+echo "deb http://mirrors.163.com/ubuntu/ precise main restricted universe multiverse" > /etc/apt/source.list
+echo "deb http://mirrors.163.com/ubuntu/ precise-security main restricted universe multiverse" >> /etc/apt/source.list
+echo "deb http://mirrors.163.com/ubuntu/ precise-updates main restricted universe multiverse" >> /etc/apt/source.list
+echo "deb http://mirrors.163.com/ubuntu/ precise-proposed main restricted universe multiverse" >> /etc/apt/source.list
+echo "deb http://mirrors.163.com/ubuntu/ precise-backports main restricted universe multiverse" >> /etc/apt/source.list
+echo "root:ustack" | chpasswd
+apt-get -y update
+apt-get -y install python-argparse cloud-init python-psutil python-pip
+/usr/sbin/useradd -m ubuntu 
+echo -e 'ubuntu\tALL=(ALL)\tNOPASSWD: ALL' >> /etc/sudoers
+sed -i 's/"quiet splash"/console=ttyS0 console=tty/' /etc/default/grub 
+sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX=console=ttyS0/' /etc/default/grub
+echo "GRUB_TERMINAL=console" >> /etc/default/grub
+update-grub
+    </command>
+  </commands>
+</template>
+

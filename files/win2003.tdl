@@ -1,0 +1,13 @@
+<template>
+  <name>win2kjeos</name>
+  <os>
+    <name>Windows</name>
+    <version>2003</version>
+    <arch>i386</arch>
+    <install type='iso'>
+      <iso>file:/home/jiangwt100/Downloads/WindowsServer2003SP2_downcc.com.iso</iso>
+    </install>
+    <key>FJ8DH-TQPYG-9KFHQ-88CB2-Y7V3Y</key>
+  </os>
+  <description>Windows 2003</description>
+</template>

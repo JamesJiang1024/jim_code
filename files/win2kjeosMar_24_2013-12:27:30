@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<domain type="kvm">
+  <name>win2kjeos</name>
+  <memory>1048576</memory>
+  <currentMemory>1048576</currentMemory>
+  <uuid>639cee36-f046-4e17-a14a-19a9a260a308</uuid>
+  <clock offset="localtime"/>
+  <vcpu>1</vcpu>
+  <features>
+    <acpi/>
+    <apic/>
+    <pae/>
+  </features>
+  <os>
+    <type>hvm</type>
+    <boot dev="hd"/>
+  </os>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>destroy</on_reboot>
+  <on_crash>destroy</on_crash>
+  <devices>
+    <graphics port="-1" type="vnc"/>
+    <interface type="bridge">
+      <source bridge="virbr0"/>
+      <mac address="52:54:00:d8:41:a1"/>
+      <model type="rtl8139"/>
+    </interface>
+    <input type="tablet" bus="usb"/>
+    <console type="pty">
+      <target port="0"/>
+    </console>
+    <serial type="tcp">
+      <source mode="bind" host="127.0.0.1" service="63258"/>
+      <protocol type="raw"/>
+      <target port="1"/>
+    </serial>
+    <disk device="disk" type="file">
+      <target dev="hda" bus="ide"/>
+      <source file="/var/lib/libvirt/images/win2kjeos.dsk"/>
+    </disk>
+  </devices>
+</domain>
