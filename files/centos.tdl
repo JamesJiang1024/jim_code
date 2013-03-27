@@ -1,0 +1,12 @@
+<template>
+  <name>centos63_x86_64</name>
+  <os>
+    <name>CentOS-6</name>
+    <version>3</version>
+    <arch>x86_64</arch>
+    <install type='iso'>
+      <iso>file:/home/jiangwt100/mirror/CentOS-6.3-x86_64-minimal.iso</iso>
+    </install>
+  </os>
+  <description>My CentOS 6.3 x86_64 template</description>
+</template>

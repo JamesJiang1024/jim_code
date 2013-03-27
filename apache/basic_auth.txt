@@ -1,0 +1,33 @@
+一、 首先生成密钥文件
+
+htpasswd -c /usr/local/apache/passwd/passwords admin
+
+输入admin的用户名和密码生成用户
+
+二、 对apache的Directory中配置Basic验证
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@gmail.com
+    ServerName mirrors.jimcloud.com
+    Alias   /ubuntu /home/apt-mirror/ubuntu/mirror/cn.archive.ubuntu.com/ubuntu/
+    DocumentRoot /home/apt-mirror/ubuntu/mirror/cn.archive.ubuntu.com/ubuntu/
+
+    <Directory /home/apt-mirror/ubuntu/mirror/cn.archive.ubuntu.com/ubuntu/>
+            Options Indexes FollowSymLinks MultiViews
+            AllowOverride None
+            Order allow,deny
+            Allow from all
+            AuthType Basic
+            AuthName "内部验证"
+            AuthBasicProvider file
+            AuthUserFile /usr/local/apache/passwd/passwords
+            Require valid-user
+    </Directory>
+    ErrorLog logs/mirrors-error_log
+    CustomLog logs/mirrors-access_log common
+</VirtualHost>
+
+三 、重新启动apache服务
+
+service httpd restart
+

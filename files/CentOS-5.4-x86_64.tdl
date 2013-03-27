@@ -1,0 +1,43 @@
+<template>
+  <name>CentOS-5.4-x86_64</name>
+  <os>
+    <name>CentOS-5</name>
+    <version>U4</version>
+    <arch>x86_64</arch>
+    <install type='iso'>
+      <iso>file:/home/media/iso/CentOS-5.4-x86_64-bin-DVD.iso</iso>
+    </install>
+  </os>
+  <description>CentOS 5.4</description>
+  <commands>
+    <command name='network-config'>
+cat > /etc/sysconfig/network-scripts/ifcfg-eth0 &lt;&lt; EOF
+DEVICE="eth0"
+BOOTPROTO=dhcp
+NM_CONTROLLED="yes"
+ONBOOT="yes"
+EOF
+    </command>
+    <command name='init-file'>
+     chmod +x /etc/rc.d/rc.local
+    </command>
+    <command name='packages'>
+    echo "root:ustack" | chpasswd
+    /usr/sbin/useradd -m ec2-user 
+    echo -e 'ec2-user\tALL=(ALL)\tNOPASSWD: ALL' >> /etc/sudoers
+    cd /etc/yum.repos.d/ wget http://mirrors.163.com/.help/CentOS5-Base-163.repo
+    sed -i 's/rhgb quiet/console=ttyS0/' /boot/grub/grub.conf
+    echo "exclude=kernel* centos-release*" >> /etc/yum.conf
+    yum -y update
+    curl -O http://ftp.ps.pl/pub/Linux/fedora-epel/5/x86_64/epel-release-5-4.noarch.rpm 
+    rpm -Uvh epel-release-5-4.noarch.rpm 
+    yum -y install perl python python-setuptools cloud-init python-pip
+    pip-python install argparse 'boto==2.5.2'
+    rm -f epel-release-5-4.noarch.rpm
+    </command>
+    <command name='post-configuration'>
+       chkconfig --level 345 sshd on
+       rm -rf /etc/udev/rules.d/70-persistent-net.rules
+    </command>
+  </commands>
+</template>

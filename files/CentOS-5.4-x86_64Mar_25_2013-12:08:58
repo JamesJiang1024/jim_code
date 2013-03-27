@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<domain type="kvm">
+  <name>CentOS-5.4-x86_64</name>
+  <memory>1048576</memory>
+  <currentMemory>1048576</currentMemory>
+  <uuid>583826a1-43a4-4ab2-8b9f-d6d0cbb9ec9b</uuid>
+  <clock offset="utc"/>
+  <vcpu>1</vcpu>
+  <features>
+    <acpi/>
+    <apic/>
+    <pae/>
+  </features>
+  <os>
+    <type>hvm</type>
+    <boot dev="hd"/>
+  </os>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>destroy</on_reboot>
+  <on_crash>destroy</on_crash>
+  <devices>
+    <graphics port="-1" type="vnc"/>
+    <interface type="bridge">
+      <source bridge="virbr0"/>
+      <mac address="52:54:00:33:6e:fa"/>
+      <model type="virtio"/>
+    </interface>
+    <input bus="ps2" type="mouse"/>
+    <console type="pty">
+      <target port="0"/>
+    </console>
+    <serial type="tcp">
+      <source mode="bind" host="127.0.0.1" service="34063"/>
+      <protocol type="raw"/>
+      <target port="1"/>
+    </serial>
+    <disk device="disk" type="file">
+      <target dev="vda" bus="virtio"/>
+      <source file="/var/lib/libvirt/images/CentOS-5.4-x86_64.dsk"/>
+    </disk>
+  </devices>
+</domain>
